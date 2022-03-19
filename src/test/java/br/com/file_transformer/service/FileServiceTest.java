@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FileServiceTest {
@@ -21,7 +20,7 @@ public class FileServiceTest {
             FileService fileService = new FileService();
 
             //When
-            List<Path> pathFiles = fileService.getPathFiles(inputPath);
+            List<Path> pathFiles = fileService.getFilePath(inputPath);
 
             //Then
             assertEquals(1, pathFiles.size());
@@ -35,7 +34,7 @@ public class FileServiceTest {
         FileService fileService = new FileService();
 
         //When
-        List<Path> pathFiles = fileService.getPathFiles(inputPath);
+        List<Path> pathFiles = fileService.getFilePath(inputPath);
 
         //Then
         assertEquals(2, pathFiles.size());
@@ -51,7 +50,23 @@ public class FileServiceTest {
 
         //When
         //Then
-        Assertions.assertThrows(InputArgumentDoesNotExistException.class, () -> fileService.getPathFiles(inputPath));
+        Assertions.assertThrows(InputArgumentDoesNotExistException.class, () -> fileService.getFilePath(inputPath));
     }
+
+    @Test
+    public void shouldReturnTheLinesOfAFile() throws IOException {
+        //Given
+        String inputPath = "src/test/resources/dataFile1.txt";
+        FileService fileService = new FileService();
+
+        //When
+        List<String> lines = fileService.readFile(Path.of(inputPath));
+
+        //Then
+        assertNotNull(lines);
+        assertEquals(2352,lines.size());
+        assertEquals("0000000070                              Palmer Prosacco00000007530000000003     1836.7420210308",lines.get(0));
+    }
+
 
 }

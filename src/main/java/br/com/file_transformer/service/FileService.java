@@ -12,11 +12,14 @@ import java.util.List;
 
 public class FileService {
 
+    public List<String> readFile(Path filePath) throws IOException {
+        return Files.readAllLines(filePath);
+    }
 
-    public List<Path> getPathFiles(String possiblePath) throws IOException, InputArgumentDoesNotExistException {
+    public List<Path> getFilePath(String possibleFilePath) throws IOException, InputArgumentDoesNotExistException {
 
         List<Path> pathFiles = new java.util.ArrayList<>();
-        File file = new File(possiblePath);
+        File file = new File(possibleFilePath);
 
         if(file.exists()){
             if(file.isFile()){

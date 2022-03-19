@@ -13,7 +13,7 @@ public class App
     public static void main( String[] args ) throws IOException, InputArgumentDoesNotExistException {
 
         FileService fileService = new FileService();
-        List<Path> filePaths = fileService.getPathFiles(args[0]);
+        List<Path> filePaths = fileService.getFilePath(args[0]);
 
     }
 }
