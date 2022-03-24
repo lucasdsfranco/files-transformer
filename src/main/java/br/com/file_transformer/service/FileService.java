@@ -52,4 +52,7 @@ public class FileService {
         return pathFiles;
     }
 
+    public void writeFile(Path filePath, String lines) throws IOException {
+         Files.write(Path.of(filePath.toString().concat("_normalized.json")), lines.getBytes());
+    }
 }
