@@ -17,8 +17,16 @@ public class User {
         this.userId = userId;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public void setOrders(List<Order> orders) {

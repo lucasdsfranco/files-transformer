@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class FileServiceTest {
     }
 
     @Test
-    public void shouldReturnTheLinesOfAFile() throws IOException {
+    public void shouldReadAFileAndReturnAListOfLines() throws IOException {
         //Given
         String inputPath = "src/test/resources/dataFile1.txt";
         FileService fileService = new FileService();
@@ -68,5 +69,23 @@ public class FileServiceTest {
         assertEquals("0000000070                              Palmer Prosacco00000007530000000003     1836.7420210308",lines.get(0));
     }
 
+    @Test
+    public void shouldWriteAFile() throws IOException {
+        //Given
+        String inputPath = "src/test/resources/writeFileTest.txt";
+        String content = "content file";
+        FileService fileService = new FileService();
+
+        //When
+        Path wroteFilePath = fileService.writeFile(Path.of(inputPath), content);
+
+        //Then
+        assertNotNull(wroteFilePath);
+        assertEquals(Path.of("writeFileTest.txt_normalized.json"), wroteFilePath.getFileName());
+        assertEquals("content file", Files.readAllLines(wroteFilePath).get(0));
+
+
+        Files.delete(wroteFilePath);
+    }
 
 }

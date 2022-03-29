@@ -27,7 +27,7 @@ public class ConversionService {
         return transactionRegisters;
     }
 
-    public List<TransactionRegister> toModel(String line) {
+    public void populateEntities(String line) {
 
         String userId = StringUtils.stripStart(line.substring(0, 10),"0");
         String userName = StringUtils.stripStart(line.substring(10, 55)," ");
@@ -62,7 +62,6 @@ public class ConversionService {
         transactionRegister.setProductValue(productValue);
 
         this.transactionRegisters.add(transactionRegister);
-        return transactionRegisters;
     }
 
     public User findUserById(Integer userId){
@@ -75,12 +74,11 @@ public class ConversionService {
         return this.products.stream().filter(p -> p.getProductId().compareTo(productId)==0).findFirst().get();
     }
 
-    public String normalize(List<TransactionRegister> transactionRegisters) {
-//TODO: passar os for para processamento com streams
-        return convertToJson(convertToNormalizedObjects(normalizeIds(transactionRegisters)));
+    public List<User> normalize() {
+        return convertToNormalizedObjects(normalizeIds(this.transactionRegisters));
     }
 
-    private String convertToJson(List<User> usuarios) {
+    public String convertToJson(List<User> usuarios) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(usuarios);
     }

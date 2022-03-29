@@ -11,13 +11,16 @@ public class Order {
     List<Product> products;
 
 
-
     public Integer getOrderId() {
         return orderId;
     }
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public String getTotal() {
+        return total;
     }
 
     public void setTotal(String total) {
