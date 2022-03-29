@@ -75,6 +75,7 @@ public class ConversionService {
     }
 
     public List<User> normalize() {
+        //TODO: refatorar a solução para utilizar somente stream(flatmap?) para evitar trabalhar com o indice e depois substituir por entidades
         return convertToNormalizedObjects(normalizeIds(this.transactionRegisters));
     }
 
